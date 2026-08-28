@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
+const pool = require('./db');
 
-app.get("/", (req, res) => {
-  res.send("Funcionou!");
+
+app.get("/rota", async (req, res) => {
+  const resultado = await pool.query('SELECT NOW()');
+  res.send(resultado.rows[0]);
 });
 
 app.listen(3000, () => {
